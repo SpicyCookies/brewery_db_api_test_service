@@ -10,7 +10,7 @@ To run the service locally, run this command: `bundle exec rails s`
 ## Planned Tasks:
 ### Phase 1:
 - [x] TASK-1: Setup gems.
-- [ ] TASK-2: Cleanup routes.
+- [x] TASK-2: Cleanup routes.
 - [ ] TASK-3: Add service client and parameter casing converters.
 - [ ] TASK-4: Add serializers.
 - [ ] TASK-5: [Waiting on feedback][Story] Add querying logic.
