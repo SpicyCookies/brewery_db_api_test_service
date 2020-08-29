@@ -1,24 +1,26 @@
-# README
+# Hotel Engine Test Service
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A small Open API Search test project that utilizes the COVID19 API https://covid19api.com/ for retrieving new (daily) and total confirmed cases by country.
 
-Things you may want to cover:
+# Installation
+To set up the service, run this command: `bin/setup`
+## Local Run
+To run the service locally, run this command: `bundle exec rails s`
 
-* Ruby version
+## Planned Tasks:
+### Phase 1:
+- [ ] TASK-1: Setup and configure gems.
+- [ ] TASK-2: Cleanup routes.
+- [ ] TASK-3: Add service client and parameter casing converters.
+- [ ] TASK-4: Add serializers.
+- [ ] TASK-5: [Waiting on feedback][Story] Add querying logic.
 
-* System dependencies
+### Phase 2 [To be planned if there is capacity]:
+- Add basic JWT token authentication.
+- Add response caching.
+- Add performant database queries/design.
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Phase 3 [To be planned if there is capacity]:
+- Add pagination.
+- Add documentation generation.
+- Add asynchronous requests.
