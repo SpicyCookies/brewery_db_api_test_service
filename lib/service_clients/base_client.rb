@@ -35,7 +35,10 @@ module ServiceClients
           403 => HotelEngineTestService::Errors::ForbiddenRequestError.new(response.status, path, response.body),
           404 => HotelEngineTestService::Errors::ResourceNotFoundError.new(response.status, path, 'Resource Not Found'),
           422 => HotelEngineTestService::Errors::UnprocessableEntityError.new(response.status, path, response.body),
-        }.fetch(response.status, HotelEngineTestService::Errors::BadHttpResponseError.new(response.status, path, response.body))
+        }.fetch(
+          response.status,
+          HotelEngineTestService::Errors::BadHttpResponseError.new(response.status, path, response.body)
+        )
 
         raise error
       end

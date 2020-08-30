@@ -27,7 +27,7 @@ describe ServiceClients::BaseClient do
       context 'when response is 400' do
         let(:response_status) { 400 }
         it 'raises BadHttpResponseError' do
-          expect { described_class.public_send(http_method, api_url, endpoint_uri, options)}
+          expect { described_class.public_send(http_method, api_url, endpoint_uri, options) }
             .to raise_error(HotelEngineTestService::Errors::BadRequestError)
         end
       end
@@ -35,7 +35,7 @@ describe ServiceClients::BaseClient do
       context 'when response is 401' do
         let(:response_status) { 401 }
         it 'raises UnauthorizedRequestError' do
-          expect { described_class.public_send(http_method, api_url, endpoint_uri, options)}
+          expect { described_class.public_send(http_method, api_url, endpoint_uri, options) }
             .to raise_error(HotelEngineTestService::Errors::UnauthorizedRequestError)
         end
       end
@@ -43,7 +43,7 @@ describe ServiceClients::BaseClient do
       context 'when response is 403' do
         let(:response_status) { 403 }
         it 'raises ForbiddenRequestError' do
-          expect { described_class.public_send(http_method, api_url, endpoint_uri, options)}
+          expect { described_class.public_send(http_method, api_url, endpoint_uri, options) }
             .to raise_error(HotelEngineTestService::Errors::ForbiddenRequestError)
         end
       end
@@ -51,7 +51,7 @@ describe ServiceClients::BaseClient do
       context 'when response is 404' do
         let(:response_status) { 404 }
         it 'raises ResourceNotFoundError' do
-          expect { described_class.public_send(http_method, api_url, endpoint_uri, options)}
+          expect { described_class.public_send(http_method, api_url, endpoint_uri, options) }
             .to raise_error(HotelEngineTestService::Errors::ResourceNotFoundError)
         end
       end
@@ -59,7 +59,7 @@ describe ServiceClients::BaseClient do
       context 'when response is 422' do
         let(:response_status) { 422 }
         it 'raises ResourceConflictError' do
-          expect { described_class.public_send(http_method, api_url, endpoint_uri, options)}
+          expect { described_class.public_send(http_method, api_url, endpoint_uri, options) }
             .to raise_error(HotelEngineTestService::Errors::UnprocessableEntityError)
         end
       end
@@ -67,7 +67,7 @@ describe ServiceClients::BaseClient do
       context 'when response is 500' do
         let(:response_status) { 500 }
         it 'raises BadHttpResponseError' do
-          expect { described_class.public_send(http_method, api_url, endpoint_uri, options)}
+          expect { described_class.public_send(http_method, api_url, endpoint_uri, options) }
             .to raise_error(HotelEngineTestService::Errors::BadHttpResponseError)
         end
       end

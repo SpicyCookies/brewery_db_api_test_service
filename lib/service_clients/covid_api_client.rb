@@ -12,7 +12,7 @@ module ServiceClients
       private
 
       def get(request_url, endpoint_uri)
-        response = ServiceClients::BaseClient.http_get(request_url, endpoint_uri)
+        ServiceClients::BaseClient.http_get(request_url, endpoint_uri)
       end
     end
   end
