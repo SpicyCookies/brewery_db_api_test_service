@@ -35,5 +35,10 @@ module HotelEngineTestService
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    # Add files that are not Rails files for development/test
+    config.autoload_paths += %W[#{config.root}/lib/ #{config.root}/lib]
+    # Add files that are not Rails files for production
+    config.eager_load_paths += %W[#{config.root}/lib]
   end
 end
