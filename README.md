@@ -11,14 +11,15 @@ To run the service locally, run this command: `bundle exec rails s`
 ### Phase 1:
 - [x] TASK-1: Setup gems.
 - [x] TASK-2: Cleanup routes.
-- [ ] TASK-3: Add service client and parameter casing converters.
-- [ ] TASK-4: Add serializers.
-- [ ] TASK-5: [Waiting on feedback][Story] Add querying logic.
+- [x] TASK-3: Add service client.
+- [ ] TASK-4: [Waiting on feedback][Story] Add querying logic.
+- [ ] TASK-5: Add serializers. Depends on TASK-4.
+- [ ] TASK-6: Add parameter casing converters. Depends on TASK-4.
 
 ### Phase 2 [To be planned if there is capacity]:
-- Add basic JWT token authentication.
-- Add response caching.
-- Add performant database queries/design.
+- [ ] TASK-7: Setup basic JWT token authentication.
+- [ ] TASK-8: Setup response caching.
+- Add performant database queries/design. Depends on TASK-4.
 
 ### Phase 3 [To be planned if there is capacity]:
 - Add pagination.
