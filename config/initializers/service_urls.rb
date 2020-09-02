@@ -7,4 +7,4 @@ service_urls = YAML.safe_load(ERB.new(File.read(service_urls_file)).result, [], 
                    .with_indifferent_access[Rails.env]
 
 # Configure faraday requests
-COVID_API_URL = service_urls[:covid_api_url]
+BREWERY_API_URL = service_urls[:brewery_api_url]

@@ -7,13 +7,13 @@ aliases: &default
 
 development:
   << : *default
-  covid_api_url: <%= ENV['COVID_API_URL'] || 'https://api.covid19api.com' %>
+  brewery_api_url: <%= ENV['BREWERY_API_URL'] || 'https://api.openbrewerydb.org' %>
 
 test:
   << : *default
-  covid_api_url: 'http://test/'
+  brewery_api_url: 'http://test/'
 
 # Rails production
 production:
   << : *default
-  covid_api_url: <%= ENV['COVID_API_URL'] || 'https://api.covid19api.com' %>
+  brewery_api_url: <%= ENV['BREWERY_API_URL'] || 'https://api.openbrewerydb.org' %>
