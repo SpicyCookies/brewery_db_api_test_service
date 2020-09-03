@@ -5,8 +5,8 @@ class SearchesController < ApplicationController
   # Observation: The default results on the external API are 20 results.
   def index
     # Assumption: A nil and empty string are the same query for the Brewery API
-    state_param = search_params[:state].blank? ? nil : search_params[:state]
-    brewery_type_param = search_params[:brewery_type].blank? ? nil : search_params[:brewery_type]
+    state_param = search_params[:state].presence
+    brewery_type_param = search_params[:brewery_type].presence
 
     search_instance = Search.find_by(
       state: state_param,
@@ -14,24 +14,24 @@ class SearchesController < ApplicationController
     )
 
     breweries = if search_instance
-      # Returns Brewery::ActiveRecord_Associations_CollectionProxy
-      search_instance.breweries
-    else
-      retrieved_breweries = Brewery.retrieve_breweries(
-        state: state_param,
-        brewery_type: brewery_type_param
-      )
+                  # Returns Brewery::ActiveRecord_Associations_CollectionProxy
+                  search_instance.breweries
+                else
+                  retrieved_breweries = Brewery.retrieve_breweries(
+                    state: state_param,
+                    brewery_type: brewery_type_param
+                  )
 
-      # Save breweries into new unique search
-      search = Search.create!(
-        state: state_param,
-        brewery_type: brewery_type_param,
-        breweries: retrieved_breweries
-      )
+                  # Save breweries into new unique search
+                  search = Search.create!(
+                    state: state_param,
+                    brewery_type: brewery_type_param,
+                    breweries: retrieved_breweries
+                  )
 
-      # Returns Brewery::ActiveRecord_Associations_CollectionProxy
-      search.breweries
-    end
+                  # Returns Brewery::ActiveRecord_Associations_CollectionProxy
+                  search.breweries
+                end
 
     # Sorts breweries if sort_by param is passed
     result_breweries = sort_breweries(breweries)

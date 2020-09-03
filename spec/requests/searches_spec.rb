@@ -119,8 +119,8 @@ describe '/searches', type: :request do
         end
 
         let(:duplicate_search_brewery_name) { "duplicate #{brewery_1_name}" }
-        let(:duplicate_search_brewery_type) { "#{brewery_1_type}" }
-        let(:duplicate_search_brewery_state) { "#{brewery_1_state}" }
+        let(:duplicate_search_brewery_type) { brewery_1_type.to_s }
+        let(:duplicate_search_brewery_state) { brewery_1_state.to_s }
         let(:duplicate_search_brewery) do
           FactoryBot.create(
             :brewery,
@@ -230,8 +230,8 @@ describe '/searches', type: :request do
         end
 
         let(:duplicate_search_brewery_name) { "duplicate #{brewery_1_name}" }
-        let(:duplicate_search_brewery_type) { "#{brewery_1_type}" }
-        let(:duplicate_search_brewery_state) { "#{brewery_state}" }
+        let(:duplicate_search_brewery_type) { brewery_1_type.to_s }
+        let(:duplicate_search_brewery_state) { brewery_state.to_s }
         let(:duplicate_search_brewery) do
           FactoryBot.create(
             :brewery,
@@ -341,8 +341,8 @@ describe '/searches', type: :request do
         end
 
         let(:duplicate_search_brewery_name) { "duplicate #{brewery_1_name}" }
-        let(:duplicate_search_brewery_type) { "#{brewery_type}" }
-        let(:duplicate_search_brewery_state) { "#{brewery_1_state}" }
+        let(:duplicate_search_brewery_type) { brewery_type.to_s }
+        let(:duplicate_search_brewery_state) { brewery_1_state.to_s }
         let(:duplicate_search_brewery) do
           FactoryBot.create(
             :brewery,
@@ -455,8 +455,8 @@ describe '/searches', type: :request do
         end
 
         let(:duplicate_search_brewery_name) { "duplicate #{brewery_1_name}" }
-        let(:duplicate_search_brewery_type) { "#{brewery_type}" }
-        let(:duplicate_search_brewery_state) { "#{brewery_state}" }
+        let(:duplicate_search_brewery_type) { brewery_type.to_s }
+        let(:duplicate_search_brewery_state) { brewery_state.to_s }
         let(:duplicate_search_brewery) do
           FactoryBot.create(
             :brewery,
