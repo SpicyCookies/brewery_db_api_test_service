@@ -1,6 +1,6 @@
 # Hotel Engine Test Service
 
-A small Open API Search test project that utilizes the COVID19 API https://covid19api.com/ for retrieving new (daily) and total confirmed cases by country.
+A small Open API Search test project that utilizes the Open Brewery DB API https://www.openbrewerydb.org/ for retrieving breweries by state and type.
 
 # Installation
 To set up the service, run this command: `bin/setup`
@@ -47,3 +47,6 @@ sort_type: Only `asc` or `desc` options.
 
 ### Nice to have features:
 TASK-6: Add parameter casing converters.
+
+# Caveats
+- Since this API is acting as a direct interface to the external API, filtering is handled by utilizing the query parameters on the external API.
