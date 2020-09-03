@@ -3,9 +3,15 @@
 module ServiceClients
   class BaseClient
     class << self
-      def http_get(request_url, endpoint_uri, options = {})
-        response = configure(request_url, options).get(endpoint_uri)
+      def http_get(request_url, endpoint_uri, query_params = {}, options = {})
+        response = configure(request_url, options).get(endpoint_uri, query_params)
         handle_response(response, request_url + endpoint_uri)
+      rescue Faraday::Error => e
+        raise HotelEngineTestService::Errors::ServiceError.new(
+          :internal_server_error,
+          request_url + endpoint_uri,
+          e.message
+        )
       end
 
       private

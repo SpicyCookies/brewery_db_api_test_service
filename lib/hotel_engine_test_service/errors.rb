@@ -12,7 +12,11 @@ module HotelEngineTestService
       end
 
       def message
-        "status: #{@status}, path: #{@path}, body: #{@body}"
+        {
+          status: @status,
+          path: @path,
+          body: @body
+        }
       end
     end
 
