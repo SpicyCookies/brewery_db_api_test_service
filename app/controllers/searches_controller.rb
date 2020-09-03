@@ -31,7 +31,10 @@ class SearchesController < ApplicationController
       retrieved_breweries
     end
 
-    render status: :ok, json: breweries.to_json
+    # Sorts breweries if sort_by param is passed
+    result_breweries = sort_breweries(breweries)
+
+    render status: :ok, json: result_breweries.to_json
   end
 
   def delete_all_searches
@@ -42,5 +45,22 @@ class SearchesController < ApplicationController
 
   def search_params
     params.permit(:state, :brewery_type)
+  end
+
+  def sort_params
+    params.permit(:sort_by, :sort_type)
+  end
+
+  # Internal: Sorts a list of Breweries
+  #
+  # Returns sorted breweries if given valid sort_by param
+  def sort_breweries(breweries)
+    if sort_params[:sort_by] == 'name'
+      if sort_params[:sort_type] == 'desc'
+        breweries.sort_name_desc
+      else
+        breweries.sort_name_asc
+      end
+    end
   end
 end

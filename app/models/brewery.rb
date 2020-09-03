@@ -12,6 +12,11 @@ class Brewery < ApplicationRecord
 
   validates_with TypeValidator
 
+  # Sort Breweries by ascending name order
+  scope :sort_name_asc, ->() { order(name: :asc) }
+  # Sort Breweries by descending name order
+  scope :sort_name_desc, ->() { order(name: :desc) }
+
   class << self
     def retrieve_breweries(state:, brewery_type:)
       # Only build query params of non-nil values
