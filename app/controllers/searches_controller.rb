@@ -14,6 +14,7 @@ class SearchesController < ApplicationController
     )
 
     breweries = if search_instance
+      # Returns Brewery::ActiveRecord_Associations_CollectionProxy
       search_instance.breweries
     else
       retrieved_breweries = Brewery.retrieve_breweries(
@@ -22,19 +23,20 @@ class SearchesController < ApplicationController
       )
 
       # Save breweries into new unique search
-      Search.create!(
+      search = Search.create!(
         state: state_param,
         brewery_type: brewery_type_param,
         breweries: retrieved_breweries
       )
 
-      retrieved_breweries
+      # Returns Brewery::ActiveRecord_Associations_CollectionProxy
+      search.breweries
     end
 
     # Sorts breweries if sort_by param is passed
     result_breweries = sort_breweries(breweries)
 
-    render status: :ok, json: result_breweries.to_json
+    render status: :ok, json: result_breweries, each_serializer: BrewerySerializer
   end
 
   def delete_all_searches
@@ -61,6 +63,8 @@ class SearchesController < ApplicationController
       else
         breweries.sort_name_asc
       end
+    else
+      breweries
     end
   end
 end
