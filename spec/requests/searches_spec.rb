@@ -4,7 +4,7 @@
 
 require 'rails_helper'
 
-# TODO: Refactor these specs
+# TODO: Refactor these specs. Too much redundancy, can utilize shared_examples.
 describe '/searches', type: :request do
   # Faraday connection object
   let(:brewery_api_url) { BREWERY_API_URL }
@@ -588,6 +588,152 @@ describe '/searches', type: :request do
       end
     end
 
+    context 'with invalid brewery_type query param passed' do
+      # TODO: Fix retry limit. "Random" values added instead.
+      let(:brewery_1_name) { 'Free State Brewing Company' }
+      let(:brewery_2_name) { 'Boulevard Brewing Company' }
+
+      let(:request_query_params) { { brewery_type: 'invalid type' } }
+
+      let(:expected_response) do
+        {
+          'error' => {
+            'body' => 'brewery_type is invalid!',
+            'path' => '',
+            'status' => 400
+          }
+        }
+      end
+
+      subject do
+        get '/searches', params: request_query_params
+      end
+
+      context 'with external API returning 400 status' do
+        it 'renders a 400 status' do
+          subject
+          expect(response).to have_http_status(400)
+        end
+
+        it 'renders bad_request response' do
+          subject
+          response_body = JSON.parse(response.body)
+          expect(response_body).to eq(expected_response)
+        end
+      end
+    end
+
+    context 'with sort_type passed without sort_by' do
+      # TODO: Fix retry limit. "Random" values added instead.
+      let(:brewery_1_name) { 'Free State Brewing Company' }
+      let(:brewery_1_state) { 'kansas' }
+      let(:brewery_2_name) { 'Boulevard Brewing Company' }
+      let(:brewery_2_state) { 'colorado' }
+
+      let(:request_query_params) { { sort_type: 'desc' } }
+
+      let(:expected_response) do
+        {
+          'error' => {
+            'body' => 'sort_by is missing!',
+            'path' => '',
+            'status' => 400
+          }
+        }
+      end
+
+      subject do
+        get '/searches', params: request_query_params
+      end
+
+      context 'with external API returning 400 status' do
+        it 'renders a 400 status' do
+          subject
+          expect(response).to have_http_status(400)
+        end
+
+        it 'renders bad_request response' do
+          subject
+          response_body = JSON.parse(response.body)
+          expect(response_body).to eq(expected_response)
+        end
+      end
+    end
+
+    context 'with invalid sort_type' do
+      # TODO: Fix retry limit. "Random" values added instead.
+      let(:brewery_1_name) { 'Free State Brewing Company' }
+      let(:brewery_1_state) { 'kansas' }
+      let(:brewery_2_name) { 'Boulevard Brewing Company' }
+      let(:brewery_2_state) { 'colorado' }
+
+      let(:request_query_params) { { sort_by: 'name', sort_type: 'invalid sort type' } }
+
+      let(:expected_response) do
+        {
+          'error' => {
+            'body' => 'sort_type is invalid!',
+            'path' => '',
+            'status' => 400
+          }
+        }
+      end
+
+      subject do
+        get '/searches', params: request_query_params
+      end
+
+      context 'with external API returning 400 status' do
+        it 'renders a 400 status' do
+          subject
+          expect(response).to have_http_status(400)
+        end
+
+        it 'renders bad_request response' do
+          subject
+          response_body = JSON.parse(response.body)
+          expect(response_body).to eq(expected_response)
+        end
+      end
+    end
+
+    context 'with invalid sort_by' do
+      # TODO: Fix retry limit. "Random" values added instead.
+      let(:brewery_1_name) { 'Free State Brewing Company' }
+      let(:brewery_1_state) { 'kansas' }
+      let(:brewery_2_name) { 'Boulevard Brewing Company' }
+      let(:brewery_2_state) { 'colorado' }
+
+      let(:request_query_params) { { sort_by: 'invalid sort by', sort_type: 'desc' } }
+
+      let(:expected_response) do
+        {
+          'error' => {
+            'body' => 'sort_by is invalid!',
+            'path' => '',
+            'status' => 400
+          }
+        }
+      end
+
+      subject do
+        get '/searches', params: request_query_params
+      end
+
+      context 'with external API returning 400 status' do
+        it 'renders a 400 status' do
+          subject
+          expect(response).to have_http_status(400)
+        end
+
+        it 'renders bad_request response' do
+          subject
+          response_body = JSON.parse(response.body)
+          expect(response_body).to eq(expected_response)
+        end
+      end
+    end
+
     context 'with service client error raised' do
       # TODO: Fix retry limit. "Random" values added instead.
       let(:brewery_1_name) { 'Free State Brewing Company' }
@@ -599,13 +745,13 @@ describe '/searches', type: :request do
         get '/searches', params: request_query_params
       end
 
-      context 'with a Faraday exception raised' do
+      context 'with a Faraday exception raised from the service client' do
         let(:error_response) do
           {
             'error' => {
-              'body' => 'Exception!',
-              'path' => 'http://test//breweries',
-              'status' => 'internal_server_error'
+              'body' => 'Faraday failed!',
+              'path' => "#{BREWERY_API_URL}#{endpoint_uri}",
+              'status' => 500
             }
           }
         end
@@ -613,7 +759,7 @@ describe '/searches', type: :request do
           allow(Faraday)
             .to receive(:new)
             .with(brewery_api_url, options)
-            .and_raise(Faraday::Error.new('Exception!'))
+            .and_raise(Faraday::Error.new('Faraday failed!'))
         end
 
         it 'renders a 500 status' do
@@ -627,6 +773,62 @@ describe '/searches', type: :request do
           expect(response_body).to eq(error_response)
         end
       end
+
+      shared_examples 'an error response status from the service client' do |status, error_status, body|
+        let(:faraday_response) do
+          double(
+            Faraday::Response,
+            status: status,
+            body: body
+          )
+        end
+
+        let(:error_response) do
+          {
+            'error' => {
+              'body' => body,
+              'path' => "#{BREWERY_API_URL}#{endpoint_uri}",
+              'status' => error_status
+            }
+          }
+        end
+
+        it "renders a #{error_status} status" do
+          subject
+          expect(response).to have_http_status(error_status)
+        end
+
+        it 'renders a exception JSON response' do
+          subject
+          response_body = JSON.parse(response.body)
+          expect(response_body).to eq(error_response)
+        end
+      end
+
+      it_behaves_like 'an error response status from the service client',
+                      400,
+                      400,
+                      'Error!'
+      it_behaves_like 'an error response status from the service client',
+                      401,
+                      401,
+                      'Error!'
+      it_behaves_like 'an error response status from the service client',
+                      403,
+                      403,
+                      'Error!'
+      it_behaves_like 'an error response status from the service client',
+                      404,
+                      404,
+                      'Resource Not Found!'
+      it_behaves_like 'an error response status from the service client',
+                      422,
+                      422,
+                      'Error!'
+      it_behaves_like 'an error response status from the service client',
+                      9999,
+                      500,
+                      'Error!'
     end
   end
 end

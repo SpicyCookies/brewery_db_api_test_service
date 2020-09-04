@@ -12,4 +12,7 @@ RSpec.describe Brewery, type: :model do
     it { should validate_presence_of :state }
     it { should validate_presence_of :brewery_type }
   end
+
+  # TODO: Specs for scopes and retrieve_breweries.
+  # Though request specs do run through this model and provide some spec coverage.
 end

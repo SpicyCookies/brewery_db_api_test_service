@@ -25,14 +25,14 @@ module ErrorHandler
   end
 
   def handle_unprocessable_entity_error(error)
-    render_error :conflict, error.message
+    render_error :unprocessable_entity, error.message
   end
 
   def handle_bad_http_response_error(error)
-    render_error :bad_request, error.message
+    render_error :internal_server_error, error.message
   end
 
-  def handle_service_error(error)
+  def handle_internal_service_error(error)
     render_error :internal_server_error, error.message
   end
 end

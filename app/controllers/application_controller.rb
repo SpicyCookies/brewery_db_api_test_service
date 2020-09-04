@@ -10,5 +10,5 @@ class ApplicationController < ActionController::API
   rescue_from HotelEngineTestService::Errors::ResourceNotFoundError, with: :handle_resource_not_found_error
   rescue_from HotelEngineTestService::Errors::UnprocessableEntityError, with: :handle_unprocessable_entity_error
   rescue_from HotelEngineTestService::Errors::BadHttpResponseError, with: :handle_bad_http_response_error
-  rescue_from HotelEngineTestService::Errors::ServiceError, with: :handle_service_error
+  rescue_from HotelEngineTestService::Errors::InternalServiceError, with: :handle_internal_service_error
 end
