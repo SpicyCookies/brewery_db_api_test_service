@@ -12,7 +12,7 @@ module SortParamsValidator
       message = 'sort_by is missing!'
 
       raise HotelEngineTestService::Errors::BadRequestError.new(
-        :bad_request, '', message
+        400, '', message
       )
     end
   end

@@ -117,7 +117,7 @@ class SearchesController < ApplicationController
       message = "brewery_type is invalid!"
 
       raise HotelEngineTestService::Errors::BadRequestError.new(
-        :bad_request, '', message
+        400, '', message
       )
     end
   end

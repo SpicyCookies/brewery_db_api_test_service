@@ -8,7 +8,7 @@ module ServiceClients
         handle_response(response, request_url + endpoint_uri)
       rescue Faraday::Error => e
         raise HotelEngineTestService::Errors::InternalServiceError.new(
-          :internal_server_error,
+          500,
           request_url + endpoint_uri,
           e.message
         )
@@ -39,11 +39,11 @@ module ServiceClients
           400 => HotelEngineTestService::Errors::BadRequestError.new(response.status, path, response.body),
           401 => HotelEngineTestService::Errors::UnauthorizedRequestError.new(response.status, path, response.body),
           403 => HotelEngineTestService::Errors::ForbiddenRequestError.new(response.status, path, response.body),
-          404 => HotelEngineTestService::Errors::ResourceNotFoundError.new(response.status, path, 'Resource Not Found'),
+          404 => HotelEngineTestService::Errors::ResourceNotFoundError.new(response.status, path, 'Resource Not Found!'),
           422 => HotelEngineTestService::Errors::UnprocessableEntityError.new(response.status, path, response.body),
         }.fetch(
           response.status,
-          HotelEngineTestService::Errors::BadHttpResponseError.new(response.status, path, response.body)
+          HotelEngineTestService::Errors::BadHttpResponseError.new(500, path, response.body)
         )
 
         raise error
