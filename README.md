@@ -34,6 +34,9 @@ sort_type: String. Only `asc` or `desc` options. Default is `asc`.
 ### Description
 Endpoint for clearing searches.
 
+## Postman Request Screenshots
+See PR: https://github.com/SpicyCookies/hotel_engine_test_service/pull/4#issue-479290760
+
 # Planned Tasks:
 ## Phase 1:
 - [x] TASK-1: Setup gems.
