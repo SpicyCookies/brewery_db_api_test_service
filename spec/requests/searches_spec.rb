@@ -4,7 +4,7 @@
 
 require 'rails_helper'
 
-# TODO: Refactor these specs
+# TODO: Refactor these specs. Too much redundancy, can utilize shared_examples.
 describe '/searches', type: :request do
   # Faraday connection object
   let(:brewery_api_url) { BREWERY_API_URL }
