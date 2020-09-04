@@ -660,6 +660,80 @@ describe '/searches', type: :request do
       end
     end
 
+    context 'with invalid sort_type' do
+      # TODO: Fix retry limit. "Random" values added instead.
+      let(:brewery_1_name) { 'Free State Brewing Company' }
+      let(:brewery_1_state) { 'kansas' }
+      let(:brewery_2_name) { 'Boulevard Brewing Company' }
+      let(:brewery_2_state) { 'colorado' }
+
+      let(:request_query_params) { { sort_by: 'name', sort_type: 'invalid sort type' } }
+
+      let(:expected_response) do
+        {
+          'error' => {
+            'body' => 'sort_type is invalid!',
+            'path' => '',
+            'status' => 400
+          }
+        }
+      end
+
+      subject do
+        get '/searches', params: request_query_params
+      end
+
+      context 'with external API returning 400 status' do
+        it 'renders a 400 status' do
+          subject
+          expect(response).to have_http_status(400)
+        end
+
+        it 'renders bad_request response' do
+          subject
+          response_body = JSON.parse(response.body)
+          expect(response_body).to eq(expected_response)
+        end
+      end
+    end
+
+    context 'with invalid sort_by' do
+      # TODO: Fix retry limit. "Random" values added instead.
+      let(:brewery_1_name) { 'Free State Brewing Company' }
+      let(:brewery_1_state) { 'kansas' }
+      let(:brewery_2_name) { 'Boulevard Brewing Company' }
+      let(:brewery_2_state) { 'colorado' }
+
+      let(:request_query_params) { { sort_by: 'invalid sort by', sort_type: 'desc' } }
+
+      let(:expected_response) do
+        {
+          'error' => {
+            'body' => 'sort_by is invalid!',
+            'path' => '',
+            'status' => 400
+          }
+        }
+      end
+
+      subject do
+        get '/searches', params: request_query_params
+      end
+
+      context 'with external API returning 400 status' do
+        it 'renders a 400 status' do
+          subject
+          expect(response).to have_http_status(400)
+        end
+
+        it 'renders bad_request response' do
+          subject
+          response_body = JSON.parse(response.body)
+          expect(response_body).to eq(expected_response)
+        end
+      end
+    end
+
     context 'with service client error raised' do
       # TODO: Fix retry limit. "Random" values added instead.
       let(:brewery_1_name) { 'Free State Brewing Company' }
