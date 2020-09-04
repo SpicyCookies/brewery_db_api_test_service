@@ -14,19 +14,19 @@ Endpoint for searching for breweries.
 
 ### Query Params
 
-state: String. State name needs to be lowercase.
+state: String.
 - Example:
 `http://localhost:3000/searches?state=new york`
 
-brewery_type: Choose from one of these values: ['micro', 'regional', 'brewpub', 'large', 'planning', 'bar', 'contract', 'proprietor']
+brewery_type: String. Choose from one of these values: ['micro', 'regional', 'brewpub', 'large', 'planning', 'bar', 'contract', 'proprietor']
 - Example:
 `http://localhost:3000/searches?brewery_type=micro`
 
-sort_by: Only `name` option.
+sort_by: String. Only `name` option.
 - Example:
 `http://localhost:3000/searches?sort_by=name`
 
-sort_type: Only `asc` or `desc` options.
+sort_type: String. Only `asc` or `desc` options. Default is `asc`.
 - Example:
 `http://localhost:3000/searches?sort_type=asc`
 
