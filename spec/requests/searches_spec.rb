@@ -597,10 +597,10 @@ describe '/searches', type: :request do
 
       let(:expected_response) do
         {
-          "error" => {
-            "body" => "brewery_type is invalid!",
-            "path" => "",
-            "status" => 400
+          'error' => {
+            'body' => 'brewery_type is invalid!',
+            'path' => '',
+            'status' => 400
           }
         }
       end
@@ -634,10 +634,10 @@ describe '/searches', type: :request do
 
       let(:expected_response) do
         {
-          "error" => {
-            "body" => "sort_by is missing!",
-            "path" => "",
-            "status" => 400
+          'error' => {
+            'body' => 'sort_by is missing!',
+            'path' => '',
+            'status' => 400
           }
         }
       end
@@ -718,7 +718,6 @@ describe '/searches', type: :request do
             }
           }
         end
-
 
         it "renders a #{error_status} status" do
           subject

@@ -114,7 +114,7 @@ class SearchesController < ApplicationController
     return if search_params[:brewery_type].blank?
 
     if ValidationData::ValidBreweryTypes.all.exclude? search_params[:brewery_type]
-      message = "brewery_type is invalid!"
+      message = 'brewery_type is invalid!'
 
       raise HotelEngineTestService::Errors::BadRequestError.new(
         400, '', message
