@@ -32,7 +32,7 @@ module ErrorHandler
     render_error :bad_request, error.message
   end
 
-  def handle_service_error(error)
+  def handle_internal_service_error(error)
     render_error :internal_server_error, error.message
   end
 end

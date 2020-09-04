@@ -37,5 +37,8 @@ module HotelEngineTestService
 
     class BadHttpResponseError < ServiceError
     end
+
+    class InternalServiceError < ServiceError
+    end
   end
 end
