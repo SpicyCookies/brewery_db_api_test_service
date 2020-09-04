@@ -18,7 +18,7 @@ class SearchesController < ApplicationController
     # Assumption: A nil and empty string are the same query for the external Brewery API.
     # Since a nil and empty string are different for ActiveRecord objects,
     # convert all empty query params to nil.
-    state_param = search_params[:state].presence
+    state_param = search_params[:state].presence&.downcase # The external API requires lowercase
     brewery_type_param = search_params[:brewery_type].presence
 
     # Query Search records for a duplicate Search record

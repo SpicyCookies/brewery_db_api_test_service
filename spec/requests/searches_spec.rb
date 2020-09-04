@@ -36,7 +36,7 @@ describe '/searches', type: :request do
 
   describe '#index' do
     # Build external API mock response
-    let(:brewery_1_state) { Faker::Address.unique.state }
+    let(:brewery_1_state) { Faker::Address.unique.state.downcase }
     let(:brewery_1_name) { Faker::Beer.unique.brand }
     let(:brewery_1_type) { 'brewpub' }
     let(:brewery_1) do
@@ -46,7 +46,7 @@ describe '/searches', type: :request do
         brewery_type: brewery_1_type
       }
     end
-    let(:brewery_2_state) { Faker::Address.unique.state }
+    let(:brewery_2_state) { Faker::Address.unique.state.downcase }
     let(:brewery_2_name) { Faker::Beer.unique.brand }
     let(:brewery_2_type) { 'micro' }
     let(:brewery_2) do
@@ -160,7 +160,7 @@ describe '/searches', type: :request do
     end
 
     context 'with state query param passed' do
-      let(:brewery_state) { Faker::Address.unique.state }
+      let(:brewery_state) { Faker::Address.unique.state.downcase }
 
       # Modify Faraday::Connection stub
       let(:faraday_query_params) { { by_state: brewery_state } }
@@ -382,7 +382,7 @@ describe '/searches', type: :request do
     end
 
     context 'with state and brewery_type query params passed' do
-      let(:brewery_state) { Faker::Address.unique.state }
+      let(:brewery_state) { Faker::Address.unique.state.downcase }
       let(:brewery_type) { 'bar' }
 
       # Modify Faraday::Connection stub
