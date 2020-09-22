@@ -1,6 +1,6 @@
-# Hotel Engine Test Service
+# Brewery DB API Test Service
 
-A small Open API Search test project that utilizes the Open Brewery DB API https://www.openbrewerydb.org/ for retrieving breweries by state and type.
+A small Open API Search test project that utilizes the Open Brewery DB API https://www.openbrewerydb.org/ for retrieving breweries by state and type. This was a project done as part of the interview process for Hotel Engine.
 
 # Installation
 To set up the service, run this command: `bin/setup`
