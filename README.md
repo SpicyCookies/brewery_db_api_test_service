@@ -2,6 +2,10 @@
 
 A small Open API Search test project that utilizes the Open Brewery DB API https://www.openbrewerydb.org/ for retrieving breweries by state and type. This was a project done as part of the interview process for Hotel Engine.
 
+### IMPORTANT NOTES: 
+* This project was built in a week. The design was hastily planned.
+* I am not planning on updating this project. This project will be utilized as a resource.
+
 # Installation
 To set up the service, run this command: `bin/setup`
 ## Local Run
